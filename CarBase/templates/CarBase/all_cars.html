@@ -1,0 +1,42 @@
+{% extends 'main.html' %}
+{% load humanize %}
+{% block styles %}
+    <style>
+        .cars-cont{
+            padding: 30px 50px;
+        }
+    </style>
+{% endblock styles %}
+{% block title %}
+    All Cars
+{% endblock title %}
+{% block content %}
+    <div class="cars-cont">
+        <table class="table table-hover table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Model</th>
+                    <th scope="col">Year</th>
+                    <th scope="col">Color</th>
+                    <th scope="col">Millage</th>
+                    <th scope="col">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for car in cars %}
+                    <tr>
+                        <th scope="row">{{ forloop.counter }}</th>
+                        <td>{{ car.model }}</td>
+                        <td>{{ car.year }}</td>
+                        <td>{{ car.color|title }}</td>
+                        <td>{{ car.millage|intcomma }}</td>
+                        <td>${{ car.price|intcomma }}</td>
+                    </tr>
+                {% empty %}
+                    <h2>No Cars Yet</h2>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+{% endblock content %}
